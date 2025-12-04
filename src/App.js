@@ -38,10 +38,30 @@ const TipScanMVP = () => {
     setTips(initialTips);
   }, []);
   
-  // Configuración activa (puede ser personalizada por propina)
-  const distribution = defaultDistribution;
+  // Configuración activa (calculada como promedio ponderado por monto de las propinas)
+  const calculatePublicDistribution = () => {
+    if (!tips || tips.length === 0) return defaultDistribution;
+    const totals = { meseros: 0, cocina: 0, bar: 0 };
+    let totalAmount = 0;
+    tips.forEach(tip => {
+      const dist = tip.customDistribution || defaultDistribution;
+      const amount = tip.amount || 0;
+      totals.meseros += dist.meseros * amount;
+      totals.cocina += dist.cocina * amount;
+      totals.bar += dist.bar * amount;
+      totalAmount += amount;
+    });
+    if (totalAmount === 0) return defaultDistribution;
+    const meserosPct = Math.round(totals.meseros / totalAmount);
+    const cocinaPct = Math.round(totals.cocina / totalAmount);
+    // asegurar que sumen 100%
+    const barPct = 100 - (meserosPct + cocinaPct);
+    return { meseros: meserosPct, cocina: cocinaPct, bar: barPct };
+  };
 
-  // Calcular totales con distribuciones personalizadas
+  const distribution = calculatePublicDistribution();
+
+  // Calcular totales with distribuciones personalizadas
   const totalTips = tips.reduce((sum, tip) => sum + tip.amount, 0);
   const workerTips = tips.filter(t => t.worker === selectedWorker).reduce((sum, tip) => sum + tip.amount, 0);
   
