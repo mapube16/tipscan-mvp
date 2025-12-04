@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/tipscan-mvp/static/css/main.e6c13ad2.css",
+    "main.js": "/tipscan-mvp/static/js/main.b0b27049.js",
+    "static/js/453.a29aad8d.chunk.js": "/tipscan-mvp/static/js/453.a29aad8d.chunk.js",
+    "index.html": "/tipscan-mvp/index.html",
+    "main.e6c13ad2.css.map": "/tipscan-mvp/static/css/main.e6c13ad2.css.map",
+    "main.b0b27049.js.map": "/tipscan-mvp/static/js/main.b0b27049.js.map",
+    "453.a29aad8d.chunk.js.map": "/tipscan-mvp/static/js/453.a29aad8d.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.b0b27049.js"
+  ]
+}
